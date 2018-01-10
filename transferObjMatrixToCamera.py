@@ -3,7 +3,7 @@ import maya.cmds as cmds
 '''
     transferObjMatrixToCam.py
 
-    This script will transfre selected object to a duplicated camera.It's useful for stablize obj.
+    This script will transfre selected object to a duplicated camera.It's useful for stablizing obj.
     Select obj and then camera. Choose one frame as reset frame, and run the script.
 
     You can then duplicate obj without animation at rest frame, and view from new camera, 
