@@ -15,19 +15,17 @@ import maya.cmds as cmds
 sel = cmds.ls(sl=True, l=True)
 mat1 = cmds.createNode('multMatrix')
 mat2 = cmds.createNode('multMatrix')
-mat3 = cmds.createNode('composeMatrix')
+mat3 = cmds.createNode('multMatrix')
 mat4 = cmds.createNode('decomposeMatrix')
 nCam  = cmds.duplicate(sel[1], rr=True)
 
 cmds.connectAttr('%s.worldMatrix[0]'%sel[1], '%s.matrixIn[0]'%mat1)
 cmds.connectAttr('%s.inverseMatrix'%sel[0], '%s.matrixIn[1]'%mat1)
 
-cmds.connectAttr('%s.translate'%sel[0], '%s.inputTranslate'%mat3)
-cmds.connectAttr('%s.rotate'%sel[0], '%s.inputRotate'%mat3)
-cmds.connectAttr('%s.scale'%sel[0], '%s.inputScale'%mat3)
+cmds.connectAttr('%s.worldMatrix[0]'%sel[0], '%s.matrixIn[0]'%mat3)
 
 cmds.connectAttr('%s.matrixSum'%mat1, '%s.matrixIn[0]'%mat2)
-cmds.connectAttr('%s.outputMatrix'%mat3, '%s.matrixIn[1]'%mat2)
+cmds.connectAttr('%s.matrixSum'%mat3, '%s.matrixIn[1]'%mat2)
 
 cmds.connectAttr('%s.matrixSum'%mat2, '%s.inputMatrix'%mat4)
 
